@@ -1,0 +1,525 @@
+{
+	"info": {
+		"_postman_id": "8ec4fb1a-04a4-4e57-bafa-469de392bf55",
+		"name": "StayNest Property Booking Backend",
+		"description": "Postman Collection to test the StayNest Airbnb-like Property Booking REST APIs. Base URL: `http://localhost:8080/api/v1`.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. User Management",
+			"item": [
+				{
+					"name": "Register Host (Aarav Sharma)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Aarav Sharma\",\n    \"email\": \"aarav.sharma@staynest.in\",\n    \"role\": \"HOST\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register Guest (Ananya Iyer)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Ananya Iyer\",\n    \"email\": \"ananya.iyer@staynest.in\",\n    \"role\": \"GUEST\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Details (ID: 1)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/users/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "2. Property Management",
+			"item": [
+				{
+					"name": "Create Property Listing",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Ganga Heritage Homestay\",\n    \"description\": \"A traditional haveli offering sunrise views of the holy Ganga river.\",\n    \"location\": \"Varanasi\",\n    \"pricePerNight\": 3500.00,\n    \"hostId\": 2\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/properties",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"properties"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Property (ID: 1)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Taj Luxury Villa - Candolim Beach\",\n    \"description\": \"Premium beachside villa in Goa with a private infinity pool and chef services.\",\n    \"location\": \"Goa\",\n    \"pricePerNight\": 17500.00,\n    \"hostId\": 1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/properties/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"properties",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Property Availability Dates",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"availableFrom\": \"2026-06-01\",\n    \"availableTo\": \"2026-06-30\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/properties/1/availabilities",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"properties",
+								"1",
+								"availabilities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Properties (Goa + Price + Rating Filters)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/properties?location=Goa&minPrice=5000&maxPrice=25000&minRating=4.0&page=0&size=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"properties"
+							],
+							"query": [
+								{
+									"key": "location",
+									"value": "Goa"
+								},
+								{
+									"key": "minPrice",
+									"value": "5000"
+								},
+								{
+									"key": "maxPrice",
+									"value": "25000"
+								},
+								{
+									"key": "minRating",
+									"value": "4.0"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Property Details (with Availabilities and Reviews)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/properties/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"properties",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Popular Properties",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/properties/popular?limit=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"properties",
+								"popular"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Bookings for Property (Host Only)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/properties/1/bookings?hostId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"properties",
+								"1",
+								"bookings"
+							],
+							"query": [
+								{
+									"key": "hostId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Booking Stats for Property (Host Only)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/properties/1/stats?hostId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"properties",
+								"1",
+								"stats"
+							],
+							"query": [
+								{
+									"key": "hostId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "3. Booking Transactions",
+			"item": [
+				{
+					"name": "Create Booking (Success - Auto-Confirmed)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"propertyId\": 1,\n    \"guestId\": 4,\n    \"startDate\": \"2026-06-20\",\n    \"endDate\": \"2026-06-25\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/bookings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Booking (Fail - Overlapping Dates Conflict)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"propertyId\": 1,\n    \"guestId\": 6,\n    \"startDate\": \"2026-06-12\",\n    \"endDate\": \"2026-06-18\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/bookings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel Booking (By Guest)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/bookings/2/cancel?userId=4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"bookings",
+								"2",
+								"cancel"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Complete Booking stay (Checkout)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/bookings/1/complete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"bookings",
+								"1",
+								"complete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Booking History (Guest ID: 4)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/bookings/user/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"bookings",
+								"user",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "4. Reviews Management",
+			"item": [
+				{
+					"name": "Add Review (Rohan Deshmukh for Taj Luxury Villa)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"propertyId\": 1,\n    \"guestId\": 5,\n    \"rating\": 5,\n    \"comment\": \"Absolutely breathtaking! Had an incredible stay at the Taj Luxury Villa. Everything was perfect!\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/reviews",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
